@@ -1,0 +1,14 @@
+{
+  "name": "tellagen",
+  "version": "0.1.0",
+  "description": "Tellagen incident investigation plugin — connects Claude to Tellagen for reading incidents, running AI investigations, posting findings, and building incident timelines.",
+  "author": {
+    "name": "Tellagen",
+    "url": "https://tellagen.com"
+  },
+  "repository": "https://github.com/tellagen/tellagen-plugin",
+  "license": "MIT",
+  "keywords": ["incident", "investigation", "on-call", "sre", "devops", "tellagen"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

@@ -1,0 +1,13 @@
+{
+  "env": {
+    "TELLAGEN_API_URL": {
+      "description": "Tellagen API base URL (e.g., https://app.tellagen.com)",
+      "required": true
+    },
+    "TELLAGEN_API_KEY": {
+      "description": "Tellagen API key (starts with tllg_). Generate one in Settings > API Keys.",
+      "required": true,
+      "secret": true
+    }
+  }
+}
