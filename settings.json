@@ -1,7 +1,7 @@
 {
   "env": {
     "TELLAGEN_API_URL": {
-      "description": "Tellagen API base URL (e.g., https://app.tellagen.com)",
+      "description": "Tellagen API base URL (e.g., https://mycompany.api.tellagen.com)",
       "required": true
     },
     "TELLAGEN_API_KEY": {
