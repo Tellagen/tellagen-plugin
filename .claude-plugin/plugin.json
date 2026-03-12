@@ -1,6 +1,6 @@
 {
   "name": "tellagen",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tellagen incident investigation plugin — connects Claude to Tellagen for reading incidents, running AI investigations, posting findings, and building incident timelines.",
   "author": {
     "name": "Tellagen",

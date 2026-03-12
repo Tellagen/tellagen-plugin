@@ -9,19 +9,38 @@ Claude Code plugin for [Tellagen](https://tellagen.com) — investigate incident
 
 ## Install
 
+### Claude Desktop
+
+Search for "Tellagen" in **Connectors** and click **Install**. You'll be prompted to enter your API key and workspace URL.
+
+### Claude Code
+
 Add the Tellagen marketplace and install the plugin:
 
 ```bash
-/plugin marketplace add tellagen/tellagen-plugins
-/plugin install tellagen@tellagen-plugins
+/plugin marketplace add tellagen/tellagen-marketplace
+/plugin install tellagen@tellagen-marketplace
 ```
 
-During setup, you'll be asked for:
+## Configure
 
 | Variable | Description |
 |----------|-------------|
 | `TELLAGEN_API_KEY` | API key starting with `tllg_`. Create one in **Settings > API Keys**. |
 | `TELLAGEN_API_URL` | Your workspace API URL (e.g., `https://mycompany.api.tellagen.com`) |
+
+**Claude Desktop**: Enter these in the connector settings form after install.
+
+**Claude Code**: Add to `~/.claude/settings.json`:
+
+```json
+{
+  "env": {
+    "TELLAGEN_API_KEY": "tllg_your_key_here",
+    "TELLAGEN_API_URL": "https://mycompany.api.tellagen.com"
+  }
+}
+```
 
 ## Usage
 

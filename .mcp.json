@@ -2,7 +2,7 @@
   "mcpServers": {
     "tellagen": {
       "command": "npx",
-      "args": ["-y", "@tellagen/mcp-server"],
+      "args": ["-y", "@tellagen/mcp-server@0.1.1"],
       "env": {
         "TELLAGEN_API_KEY": "${TELLAGEN_API_KEY}",
         "TELLAGEN_API_URL": "${TELLAGEN_API_URL}"
