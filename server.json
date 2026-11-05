@@ -6,7 +6,7 @@
     "url": "https://github.com/tellagen/tellagen-plugin",
     "source": "github"
   },
-  "version": "0.1.1",
+  "version": "0.4.1",
   "packages": [
     {
       "registryType": "npm",
