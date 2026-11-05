@@ -4,7 +4,7 @@ Claude Code plugin for [Tellagen](https://tellagen.com) — investigate incident
 
 ## What's included
 
-- **Tellagen MCP server** (`@tellagen/mcp-server`) — 12 tools for reading incidents, running investigations, posting findings, and promoting to timelines
+- **Tellagen MCP server** (`@tellagen/mcp-server`) — 46 tools for reading incidents, running investigations, posting findings, building figures and source links, and promoting to timelines
 - **Investigation skill** (`/tellagen:investigate`) — structured workflow that walks Claude through a full incident investigation
 
 ## Install
@@ -87,6 +87,19 @@ Investigate incident #42 on Tellagen
 | `tellagen_complete_investigation` | Close an investigation run |
 | `tellagen_update_finding` | Dismiss or restore a finding |
 | `tellagen_promote_finding` | Promote a finding to the timeline |
+
+### Diagnosis
+
+| Tool | Description |
+|------|-------------|
+| `tellagen_pick_up_investigation` | Attach to a run and read its context and capabilities |
+| `tellagen_post_trace_step` | Post a check, with its outcome and cause key |
+| `tellagen_update_cause` | Post or update a cause you are testing |
+| `tellagen_build_figure` | Build a typed figure (stats, compare, trend, checks, range_overlap, histogram, run_history, diff) from numbers you read |
+| `tellagen_build_source_link` | Build a Grafana or GitHub link for an evidence ref |
+| `tellagen_get_context_attachment` | Read a screenshot a responder added to a run |
+
+The server has more tools for services, runbooks, impact and postmortems. See the server's own documentation for the full list.
 
 ## Works with your existing tools
 
