@@ -89,6 +89,14 @@ tellagen_post_finding(
 
 ### 5. COMPLETE: close the run
 
+Do these five things before you complete the run:
+
+1. Each cause you tested was posted with `tellagen_update_cause`, and its state is current.
+2. Each chain step with numbers has a figure built with `tellagen_build_figure` (placement `step_figure`), not written by hand.
+3. The key moment has a timeline event from `tellagen_post_timeline_event`, with a `body` and with `blocks` built with `tellagen_build_figure` (placement `timeline_block`).
+4. Each evidence ref has `links` or a read-only `command`.
+5. Each change ref cites `finding_ids` or `step_ids`.
+
 ```
 tellagen_complete_investigation(run_id, status: "completed", result_summary: {...})
 ```
