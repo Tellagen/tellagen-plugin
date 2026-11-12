@@ -1,0 +1,81 @@
+{
+  "description": "Tell the session when the Tellagen sign-in is missing or a diagnosis run is open, and record Grafana, GitHub, kubectl and gh calls as steps of the open run.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.5.0 status --line",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__.*[gG]rafana.*|mcp__.*[gG]it[hH]ub.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.5.0 trace-hook",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(kubectl *)",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.5.0 trace-hook",
+            "timeout": 10,
+            "async": true
+          },
+          {
+            "type": "command",
+            "if": "Bash(gh *)",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.5.0 trace-hook",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "mcp__.*[gG]rafana.*|mcp__.*[gG]it[hH]ub.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.5.0 trace-hook",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(kubectl *)",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.5.0 trace-hook",
+            "timeout": 10,
+            "async": true
+          },
+          {
+            "type": "command",
+            "if": "Bash(gh *)",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.5.0 trace-hook",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
