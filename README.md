@@ -7,6 +7,7 @@ Claude Code plugin for [Tellagen](https://tellagen.com): diagnose incidents with
 - **Tellagen MCP server** ([`@tellagen/mcp-server`](https://www.npmjs.com/package/@tellagen/mcp-server)): tools for reading incidents, running diagnoses, posting findings, causes, figures and source links, and promoting to timelines.
 - **`/tellagen:connect`**: sign in with your browser. No API key to copy.
 - **`/tellagen:diagnose [run or incident]`**: find the run that waits for you in Tellagen and diagnose it. With no argument it takes the run that waits.
+- **`/tellagen:check-tools`**: recheck which tools this client can use (Grafana, Kubernetes, GitHub, docs) and tell Tellagen, so the tools table in settings is current. Needs `@tellagen/mcp-server` 0.6.0 or newer.
 - **Investigation skill** (`/tellagen:investigate`): the workflow for a full diagnosis.
 - **Hooks**: a session start check, and the recording of Grafana, GitHub, `kubectl` and `gh` calls as steps (see "Hooks" below).
 
