@@ -119,6 +119,10 @@ The tool checks the result first. If something is missing, it answers `completed
 
 If the run fails or times out, use `status: "failed"` and a `failure_reason`. Always close the run.
 
+### 6. AFTER: add to a finished run
+
+If a source you recorded as not read becomes readable later in the same session (the person fixed a connector, granted access or pasted the file), read it and call `tellagen_amend_investigation` with what changed: a `reason` of one line, the new findings, and the coverage entry that is now `checked`. Send a new `result_summary` only when the headline or the causal path changes. Do not tell the person that Tellagen cannot take it. A finished run takes additions for a limited time. When a write answers that the run is finished but takes additions, use the same tool. The amendment is a new version; the earlier one stays. A person still accepts or rejects the root cause. The tool is in the `diagnosis` set of a server that lists `run_amendments_v1`; with an older server it says so and sends nothing, so tell the person what you found in your own answer. If the tool is not in your list, do the same.
+
 ## A lead from a past incident
 
 When Tellagen finds a past incident that looks like this one and whose cause a person accepted, the pickup bundle has `request.context.suspected_cause_hints` (and the server adds `mcp_cause_lead`). A hint has the past incident (`source_incident_id`, `source_title`), the accepted `cause_claim`, sometimes the `fix` and the runbook step that supported it, and `reasons` (`same_alert`, `same_service`, `same_cause`, `similar_words`, `linked`).
@@ -135,6 +139,7 @@ Responders read two sentences first. Write both for a person.
 - **The headline claim** (`conclusion.sentence`) has 15 words or fewer and names one cause: what broke and why. Put the numbers, the other causes and the checks you made in the findings, the chain and `ruled_out`.
   - Good: "The checkout pool size of 5 ran out of database connections at 14:02."
   - Bad: "Based on the metrics, logs and deploy history that were reviewed, it is likely that a recent change to the checkout service caused connection pool exhaustion and the resulting elevated error rates."
+- **A source you could not read is not a question.** Put it in `coverage` with the state `gap` or `not_configured` and a `reason`. Do not post it as a blocking `gap` finding, and do not ask the person about it.
 - **A blocking question** is a `gap` finding that a person has to answer before the diagnosis can be trusted. Write its `claim` as one real question that ends with a question mark, asks one thing, and can be answered with a fact. Put what you already checked in `evidence_summary`.
   - Good: "Did the 14:02 deploy of the billing service lower the retry limit?"
   - Bad: "Whether the retry limit was lowered by the 14:02 deploy of the billing service could not be established from the available data and needs to be confirmed."
@@ -186,7 +191,7 @@ The MCP checks `result_summary` before it sends anything and refuses a completio
 
 **Ruled out: `ruled_out`** (up to 5). `{label, explanation, finding_ids, links, confidence_percent}` for each cause you checked and excluded, taken from your `negative` findings.
 
-**Coverage: `coverage`** (up to 8). One entry per source you used or tried: `{source, state, summary, step_ids, finding_ids, links}`. Do not list a source you never queried. `state` is `checked` (read and used), `gap` (configured but you could not read it) or `not_configured` (the workspace has no such source). `step_ids` are the ids of the chain steps that source proved.
+**Coverage: `coverage`** (up to 8). One entry per source you used or tried: `{source, state, summary, step_ids, finding_ids, links}`. Do not list a source you never queried. `state` is `checked` (read and used), `gap` (configured but you could not read it) or `not_configured` (the workspace has no such source). `step_ids` are the ids of the chain steps that source proved. A source you could not read also has a `reason` (`wrong_account`, `not_connected`, `auth_expired`, `error` or `no_source`), `retryable` (true unless the source does not exist) and one sentence in `detail` (up to 200 characters, no secret or address). The reason goes with the entry, not in a finding.
 
 **Unknowns: `unknowns`** (up to 5). `{label, why, finding_ids}` for what you could not establish, such as "why staging did not show it".
 
@@ -208,7 +213,7 @@ The MCP checks `result_summary` before it sends anything and refuses a completio
   "ruled_out": [{"label": "Database saturation", "explanation": "Connections stayed under 40% of the pool.", "finding_ids": [14], "confidence_percent": 80}],
   "coverage": [
     {"source": "Grafana", "state": "checked", "step_ids": ["errors"], "finding_ids": [12]},
-    {"source": "Kubernetes", "state": "gap", "summary": "No cluster access in this profile", "finding_ids": [15]}
+    {"source": "Kubernetes", "state": "gap", "reason": "error", "retryable": true, "detail": "Reading the cluster events failed with a forbidden error."}
   ],
   "unknowns": [{"label": "Why staging did not show it", "why": "No staging metrics are configured"}]
 }
@@ -337,12 +342,12 @@ A runbook with the `github` source (`actions:read`, `commits:read`, `pull_reques
 | `evidence` | Proof for a chain step | "Stack trace shows NPE at line 42" |
 | `recommendation` | A suggested action | "Roll back deployment abc123" |
 | `negative` | Something you ruled out (also a `ruled_out` entry). Send `role: "contradicts"` | "Database performance is normal" |
-| `gap` | A source you could not read (also a `coverage` gap). Send `role: "gap"` | "Kubernetes events: no namespace access" |
+| `gap` | A question a person can answer, ending with a question mark. Send `role: "gap"`. A source you could not read is a `coverage` entry with a `reason`, not a gap finding | "Did the 14:02 deploy lower the retry limit?" |
 
 ## Tips
 
 - Start with observations, then look for correlations, form hypotheses, and find evidence.
-- Post negative and gap findings too. Knowing what is not the cause is valuable.
+- Post negative findings too. Knowing what is not the cause is valuable. A source you could not read goes in `coverage` with a reason.
 - Call `tellagen_build_source_link` right after a Grafana or GitHub query. A proof with no link and no command shows "No source link" to responders.
 - Cite findings by numeric `id` in `finding_ids`, never by claim.
 - Use confidence honestly: 0.9 and up for near-certain, 0.5 to 0.7 for plausible, below 0.5 for speculative.
