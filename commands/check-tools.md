@@ -6,7 +6,7 @@ allowed-tools: mcp__plugin_tellagen_tellagen__tellagen_enable_toolset, mcp__plug
 Recheck the tools this client can use, and tell Tellagen.
 
 1. Call `tellagen_enable_toolset` with `settings`.
-2. Look at the MCP servers and shell tools you have. Map them to `grafana`, `kubernetes`, `github`, `docs` and `local_host`. Make one entry for each key: `found` when you can use it, `not_found` when you cannot. Add a short detail only when it holds no token, no password and no path with a user name.
+2. Look at the MCP servers and shell tools you have. Map them to `grafana`, `kubernetes`, `github` and `docs`. Make one entry for each key: `found` when you can use it, `not_found` when you cannot. For `docs`, put the name of the source in the detail (for example Confluence, Notion or repository folder). Add a detail only when it holds no token, no password, no address and no path with a user name.
 3. If you have the Kubernetes tool, run the safety check from the `tellagen_report_available_sources` description: four `kubectl auth can-i` tests, with no output printed. Pass the results as `kubernetes_checks`.
 4. Call `tellagen_report_available_sources` with the entries. The tools table in Tellagen settings now shows this client.
 5. For each tool that is not found, say in one sentence why this client cannot see it: the server is not set up in this client, the command is not on the PATH that the client starts it with, or a setting it needs is missing. If you cannot tell, say that. Tell the person that `npx @tellagen/mcp-server doctor` finds the cause from the config files.
