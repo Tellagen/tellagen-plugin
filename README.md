@@ -2,15 +2,6 @@
 
 Claude Code plugin for [Tellagen](https://tellagen.com): diagnose incidents with your own tools, post structured findings and figures, and keep a record of the steps.
 
-## What's included
-
-- **Tellagen MCP server** ([`@tellagen/mcp-server`](https://www.npmjs.com/package/@tellagen/mcp-server)): tools for reading incidents, running diagnoses, posting findings, causes, figures and source links, and promoting to timelines.
-- **`/tellagen:connect`**: sign in with your browser. No API key to copy.
-- **`/tellagen:diagnose [run or incident]`**: find the run that waits for you in Tellagen and diagnose it. With no argument it takes the run that waits.
-- **`/tellagen:check-tools`**: recheck which tools this client can use (Grafana, Kubernetes, GitHub, docs) and tell Tellagen, so the tools table in settings is current. Needs `@tellagen/mcp-server` 0.6.0 or newer.
-- **Investigation skill** (`/tellagen:investigate`): the workflow for a full diagnosis.
-- **Hooks**: a session start check, and the recording of Grafana, GitHub, `kubectl` and `gh` calls as steps (see "Hooks" below).
-
 ## Install
 
 ```bash
@@ -41,9 +32,18 @@ Set `TELLAGEN_API_KEY` and `TELLAGEN_API_URL` (they win over a sign-in). In `~/.
 
 Create the key in **Settings > API Keys** with the **Local Diagnosis** preset, which sets the scopes it needs (`incidents:read` and `incidents:write`).
 
+## What's included
+
+- **Tellagen MCP server** ([`@tellagen/mcp-server`](https://www.npmjs.com/package/@tellagen/mcp-server)): tools for reading incidents, running diagnoses, posting findings, causes, figures and source links, and promoting to timelines.
+- **`/tellagen:connect`**: sign in with your browser. No API key to copy.
+- **`/tellagen:diagnose [run or incident]`**: find the run that waits for you in Tellagen and diagnose it. With no argument it takes the run that waits.
+- **`/tellagen:check-tools`**: recheck which tools this client can use (Grafana, Kubernetes, GitHub, docs) and tell Tellagen, so the tools table in settings is current. Needs `@tellagen/mcp-server` 0.6.0 or newer.
+- **Investigation skill** (`/tellagen:investigate`): the workflow for a full diagnosis.
+- **Hooks**: a session start check, and the recording of Grafana, GitHub, `kubectl` and `gh` calls as steps (see "Hooks" below).
+
 ## Which server version
 
-The plugin starts `@tellagen/mcp-server@^0.5.0`: the newest 0.5 release, and not a 0.6 or later one. A plugin that pins one exact server version goes stale (installed copies keep an old protocol and an old skill). A range that follows every release would let a breaking release reach the hooks at once, which run the server on each Grafana, GitHub, `kubectl` and `gh` call with access to your stored key. The caret range follows the fixes of 0.5 and stops at the next minor version, so a plugin update raises it on purpose. The hooks start the server with `--prefer-offline`, so they use the version the server start already installed, and a hook never waits on the network when the package is in the cache.
+The plugin starts `@tellagen/mcp-server@^0.8.1`: the newest 0.8 release, and not a 0.9 or later one. A plugin that pins one exact server version goes stale (installed copies keep an old protocol and an old skill). A range that follows every release would let a breaking release reach the hooks at once, which run the server on each Grafana, GitHub, `kubectl` and `gh` call with access to your stored key. The caret range follows the fixes of 0.8 and stops at the next minor version, so a plugin update raises it on purpose. The hooks start the server with `--prefer-offline`, so they use the version the server start already installed, and a hook never waits on the network when the package is in the cache.
 
 ## Usage
 
