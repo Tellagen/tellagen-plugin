@@ -1,7 +1,7 @@
 ---
 description: Diagnose the incident run that waits for you in Tellagen
 argument-hint: "[run ID or incident number]"
-allowed-tools: mcp__plugin_tellagen_tellagen__tellagen_next_investigation, mcp__plugin_tellagen_tellagen__tellagen_pick_up_investigation, mcp__plugin_tellagen_tellagen__tellagen_resume, mcp__plugin_tellagen_tellagen__tellagen_start_investigation
+allowed-tools: mcp__plugin_tellagen_tellagen__tellagen_next_investigation, mcp__plugin_tellagen_tellagen__tellagen_pick_up_investigation, mcp__plugin_tellagen_tellagen__tellagen_resume, mcp__plugin_tellagen_tellagen__tellagen_start_investigation, mcp__plugin_tellagen_tellagen__tellagen_amend_investigation
 ---
 
 Diagnose with Tellagen. The argument is: $ARGUMENTS
@@ -11,6 +11,6 @@ Diagnose with Tellagen. The argument is: $ARGUMENTS
 - Otherwise the argument is a run ID. Call `tellagen_pick_up_investigation` with it.
 - If a run is already open on this computer and the person says to continue, call `tellagen_resume`.
 
-Pick the run up with `tellagen_pick_up_investigation`. Pass your model name and the data sources you can reach. Then follow the `tellagen:investigate` skill: read the context, post each cause you test and each finding when you find it, build figures with `tellagen_build_figure`, and complete the run with a result whose headline has 15 words or fewer.
+Pick the run up with `tellagen_pick_up_investigation`. Pass your model name and the data sources you can reach. Then follow the `tellagen:investigate` skill: read the context, post each cause you test and each finding when you find it, build figures with `tellagen_build_figure`, and complete the run with a result whose headline has 15 words or fewer. Record a source you could not read in `coverage` with a reason, not as a question for the person. If a source you recorded as not read becomes readable later in the same session, read it and call `tellagen_amend_investigation` with what changed. Do not tell the person that Tellagen cannot take it.
 
 If Tellagen says it is not set up, tell the person to run `/tellagen:connect`, and stop.
