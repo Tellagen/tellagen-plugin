@@ -1,6 +1,6 @@
 ---
 name: investigate
-description: "Investigate an active incident and post structured findings to Tellagen"
+description: "Use when the user asks to diagnose or investigate a Tellagen incident or alert, names an incident such as INC-123, or a Tellagen diagnosis run is waiting. Reads the incident, tests causes with the tools you have (Grafana, GitHub, Kubernetes, logs), posts findings with evidence and completes the run in Tellagen."
 ---
 
 # Tellagen Incident Investigation
