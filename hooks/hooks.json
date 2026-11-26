@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.8.1 status --line",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.9.0 status --line",
             "timeout": 10
           }
         ]
@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.8.1 trace-hook",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.9.0 trace-hook",
             "timeout": 10,
             "async": true
           }
@@ -31,14 +31,14 @@
           {
             "type": "command",
             "if": "Bash(kubectl *)",
-            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.8.1 trace-hook",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.9.0 trace-hook",
             "timeout": 10,
             "async": true
           },
           {
             "type": "command",
             "if": "Bash(gh *)",
-            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.8.1 trace-hook",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.9.0 trace-hook",
             "timeout": 10,
             "async": true
           }
@@ -51,7 +51,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.8.1 trace-hook",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.9.0 trace-hook",
             "timeout": 10,
             "async": true
           }
@@ -63,14 +63,14 @@
           {
             "type": "command",
             "if": "Bash(kubectl *)",
-            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.8.1 trace-hook",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.9.0 trace-hook",
             "timeout": 10,
             "async": true
           },
           {
             "type": "command",
             "if": "Bash(gh *)",
-            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.8.1 trace-hook",
+            "command": "npx -y --prefer-offline @tellagen/mcp-server@^0.9.0 trace-hook",
             "timeout": 10,
             "async": true
           }

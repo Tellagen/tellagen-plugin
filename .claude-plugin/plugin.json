@@ -1,6 +1,6 @@
 {
   "name": "tellagen",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Tellagen incident investigation plugin: sign in with your browser, diagnose incidents with your own tools, post findings and figures, and keep a record of the steps.",
   "author": {
     "name": "Tellagen",

@@ -43,7 +43,7 @@ Create the key in **Settings > API Keys** with the **Local Diagnosis** preset, w
 
 ## Which server version
 
-The plugin starts `@tellagen/mcp-server@^0.8.1`: the newest 0.8 release, and not a 0.9 or later one. A plugin that pins one exact server version goes stale (installed copies keep an old protocol and an old skill). A range that follows every release would let a breaking release reach the hooks at once, which run the server on each Grafana, GitHub, `kubectl` and `gh` call with access to your stored key. The caret range follows the fixes of 0.8 and stops at the next minor version, so a plugin update raises it on purpose. The hooks start the server with `--prefer-offline`, so they use the version the server start already installed, and a hook never waits on the network when the package is in the cache.
+The plugin starts `@tellagen/mcp-server@^0.9.0`: the newest 0.9 release, and not a 0.10 or later one. A plugin that pins one exact server version goes stale (installed copies keep an old protocol and an old skill). A range that follows every release would let a breaking release reach the hooks at once, which run the server on each Grafana, GitHub, `kubectl` and `gh` call with access to your stored key. The caret range follows the fixes of 0.9 and stops at the next minor version, so a plugin update raises it on purpose. The hooks start the server with `--prefer-offline`, so they use the version the server start already installed, and a hook never waits on the network when the package is in the cache.
 
 ## Usage
 
